@@ -54,7 +54,7 @@ def index():
 def post(post_id):
     post = get_post(post_id)
     if post is None:
-
+        app.logger.info('404 "' + str(post_id) + '" article not found!')
         return render_template('404.html'), 404
     else:
         app.logger.info('Article "' + str(post['title'] + '" retrieved!'))
@@ -120,7 +120,7 @@ def metrics():
     return response
 
 
-# start the application on port 3111ß
+# start the application on port 3111
 if __name__ == "__main__":
     logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.DEBUG, datefmt='%Y-%m-%d %H:%M:%S')
-    app.run(host='127.0.0.1', port='3111')
+    app.run(host='0.0.0.0', port='3111')

@@ -1,11 +1,23 @@
 ## Docker commands used to build the application 
-# TODO: insert the docker build command
+docker build -t techtrends  .
 
 ## Docker commands used to run the application
-# TODO: insert the docker run command
+docker run -d -p 3111:3111 techtrends
 
 ## Docker commands used to get the application logs
-# TODO: insert the docker logs command
+docker logs 7707496951dc6de01d81b421b32aa95b1dc12b863097da128a3cfe749a091515
 
 ## Logs from the container running the TechTrends application
-# TODO: paste logs from the Docker container 
+2021-06-25 22:41:51 -  * Running on http://0.0.0.0:3111/ (Press CTRL+C to quit)
+2021-06-25 22:41:55 - 172.17.0.1 - - [25/Jun/2021 22:41:55] "GET / HTTP/1.1" 200 -
+2021-06-25 22:41:56 - Article "2020 CNCF Annual Report" retrieved!
+2021-06-25 22:41:56 - 172.17.0.1 - - [25/Jun/2021 22:41:56] "GET /1 HTTP/1.1" 200 -
+2021-06-25 22:42:01 - 404 "12" article not found!
+2021-06-25 22:42:01 - 172.17.0.1 - - [25/Jun/2021 22:42:01] "GET /12 HTTP/1.1" 404 -
+2021-06-25 22:42:14 - 172.17.0.1 - - [25/Jun/2021 22:42:14] "GET / HTTP/1.1" 200 -
+2021-06-25 22:42:15 - About Us Page retrieved!
+2021-06-25 22:42:15 - 172.17.0.1 - - [25/Jun/2021 22:42:15] "GET /about HTTP/1.1" 200 -
+2021-06-25 22:42:17 - 172.17.0.1 - - [25/Jun/2021 22:42:17] "GET / HTTP/1.1" 200 -
+2021-06-25 22:42:18 - Article "Kubernetes v1.20 Release Notes" retrieved!
+2021-06-25 22:42:18 - 172.17.0.1 - - [25/Jun/2021 22:42:18] "GET /3 HTTP/1.1" 200 -
+2021-06-25 22:42:19 - 172.17.0.1 - - [25/Jun/2021 22:42:19] "GET / HTTP/1.1" 200 -
