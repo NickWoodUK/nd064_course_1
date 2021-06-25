@@ -1,4 +1,4 @@
-name: Python version
+name: TechTrends - Package with Docker
 
 on:
   push:
