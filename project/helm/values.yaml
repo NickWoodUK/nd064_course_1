@@ -1,0 +1,22 @@
+namespace:
+  name: sandbox
+ 
+service:
+  port: 8111
+  type: ClusterIP
+
+image:
+  repository: nickwooduk/techtrends
+  tag: latest
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 64Mi
+  limits:
+    cpu: 500m
+    memory: 128Mi
+

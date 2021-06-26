@@ -3,10 +3,11 @@ namespace:
  
 service:
   port: 8111
+  targetPort: 3111
   type: ClusterIP
 
 image:
-  repository: nginx 
+  repository: nginx
   tag: alpine
   pullPolicy: IfNotPresent
 
