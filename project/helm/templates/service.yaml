@@ -7,5 +7,5 @@ spec:
   ports:
   - port: {{ .Values.service.port }}
     protocol: TCP
-    targetPort: {{ .Values.targetPort.port }}
+    targetPort: 3111
   type: {{ .Values.service.type }}
