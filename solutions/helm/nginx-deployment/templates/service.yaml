@@ -10,7 +10,7 @@ spec:
   ports:
   - port: {{ .Values.service.port }} 
     protocol: TCP
-    targetPort: {{ .Values.service.port }}
+    targetPort: {{ .Values.service.targetPort }}
   selector:
     app: nginx
     tag: alpine

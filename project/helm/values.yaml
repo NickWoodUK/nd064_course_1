@@ -3,6 +3,7 @@ namespace:
  
 service:
   port: 8111
+  targetPort: 3111
   type: ClusterIP
 
 image:
