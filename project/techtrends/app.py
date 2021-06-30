@@ -15,6 +15,17 @@ def get_db_connection():
     return connection
 
 
+def test_db_connection():
+    try:
+        number_of_articles = get_number_of_articles()
+
+        # Check if anything at all is returned
+        return True
+
+    except:
+        app.logger.info("ERROR IN CONNECTION")
+    return False
+
 # Function to get a post using its ID
 def get_post(post_id):
     connection = get_db_connection()
@@ -94,13 +105,21 @@ def create():
 
 @app.route('/healthz')
 def healthcheck():
+
+    result_message = "OK - healthy"
+    result_status = 200
+
+    if not test_db_connection():
+        result_message = "db connection error"
+        result_status = 500
+
     response = app.response_class(
-        response=json.dumps({"result": "OK - healthy"}),
-        status=200,
+        response=json.dumps({"result": result_message}),
+        status=result_status,
         mimetype='application/json'
     )
 
-    app.logger.info('Status request successful')
+    app.logger.info('Health check request complete')
     return response
 
 
