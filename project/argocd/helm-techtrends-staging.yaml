@@ -12,7 +12,7 @@ spec:
     path: project/helm/
     repoURL: https://github.com/NickWoodUK/nd064_course_1
     targetRevision: HEAD
-      helm:
+    helm:
         valueFiles:
           - values-staging.yaml
   syncPolicy: {}
