@@ -24,6 +24,10 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
+          labels: |
+            org.opencontainers.image.title=MyCustomTitle
+            org.opencontainers.image.description=Another description
+            org.opencontainers.image.vendor=MyCompany
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
@@ -37,14 +41,13 @@ jobs:
       - name: Get Event Name
         run: echo ${{ github.event_name != 'pull_request' }}
 
-      #- name: Get labels
-        #run: echo ${{ steps.meta.outputs.labels }}
+      - name: Get labels
+        run: echo ${{ steps.meta.outputs.labels }}
 
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          #context: project
-          context: .
+          context: project
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
-          #labels: ${{ steps.meta.outputs.labels }}
+          labels: ${{ steps.meta.outputs.labels }}
