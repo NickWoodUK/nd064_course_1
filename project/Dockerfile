@@ -1,6 +1,8 @@
 FROM python:3.8
 LABEL maintainer="Nick Wood"
-LABEL "org.opencontainers.image.description"="Tech Trends Project Services"
+LABEL description="This text illustrates \
+that label-values can span multiple lines."
+
 
 COPY /techtrends /app
 WORKDIR /app
