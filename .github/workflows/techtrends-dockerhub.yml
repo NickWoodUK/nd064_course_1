@@ -18,7 +18,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: name/app
+          images: nickwooduk/techtrends
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
@@ -39,9 +39,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: project
-          #push: true
-          tags: nickwooduk/techtrends:latest
+          #tags: nickwooduk/techtrends:latest
           #context: .
           push: ${{ github.event_name != 'pull_request' }}
-          #tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}
           #labels: ${{ steps.meta.outputs.labels }}
