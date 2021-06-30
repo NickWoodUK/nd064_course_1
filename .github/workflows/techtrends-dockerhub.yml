@@ -1,4 +1,4 @@
-name: TechTrends - Package with Docker
+name: TechTrends - Package with Docker file
 
 on:
   push:
