@@ -1,25 +1,26 @@
 import sqlite3
 import logging
+import sys
 
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from multiprocessing import Value
 
-counter = Value('i', 0)
-
+# Define the Flask application
+app = Flask(__name__)
+app.config['COUNTER'] = 0
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
 def get_db_connection():
     connection = sqlite3.connect('database.db')
     connection.row_factory = sqlite3.Row
+    app.config['COUNTER'] += 1
     return connection
 
 
 def test_db_connection():
     try:
         number_of_articles = get_number_of_articles()
-
-        # Check if anything at all is returned
         return True
 
     except:
@@ -32,7 +33,6 @@ def get_post(post_id):
     post = connection.execute('SELECT * FROM posts WHERE id = ?',
                               (post_id,)).fetchone()
     connection.close()
-    counter.value += 1
     return post
 
 
@@ -40,13 +40,7 @@ def get_number_of_articles():
     connection = get_db_connection()
     posts = connection.execute('SELECT * FROM posts').fetchall()
     connection.close()
-    counter.value += 1
     return len(posts)
-
-
-# Define the Flask application
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your secret key'
 
 
 # Define the main route of the web application
@@ -55,7 +49,6 @@ def index():
     connection = get_db_connection()
     posts = connection.execute('SELECT * FROM posts').fetchall()
     connection.close()
-    counter.value += 1
     return render_template('index.html', posts=posts)
 
 
@@ -94,7 +87,6 @@ def create():
                                (title, content))
             connection.commit()
             connection.close()
-            counter.value += 1
 
             app.logger.info('Article "' + title + '" created!')
 
@@ -127,7 +119,7 @@ def healthcheck():
 def metrics():
     connection = get_db_connection()
     number_of_articles = get_number_of_articles()
-    metric_text = '{"db_connection_count": ' + str(counter.value) + ', "post_count": ' + str(number_of_articles) + '}'
+    metric_text = '{"db_connection_count": ' + str(app.config['COUNTER']) + ', "post_count": ' + str(number_of_articles) + '}'
 
     response = app.response_class(
         response=json.dumps(metric_text),
@@ -141,5 +133,10 @@ def metrics():
 
 # start the application on port 3111
 if __name__ == "__main__":
-    logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.DEBUG, datefmt='%Y-%m-%d %H:%M:%S')
+    # set logger to handle STDOUT and format output
+    stdout_handler = logging.StreamHandler(sys.stdout)
+    format_output = '%(asctime)s %(message)s'
+
+    logging.basicConfig(format=format_output, level=logging.DEBUG, handlers=[stdout_handler])
+
     app.run(host='0.0.0.0', port='3111')
