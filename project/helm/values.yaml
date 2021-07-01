@@ -8,7 +8,7 @@ service:
 
 image:
   repository: nickwooduk/techtrends
-  tag: latest
+  tag: main
   pullPolicy: IfNotPresent
 
 replicaCount: 1
