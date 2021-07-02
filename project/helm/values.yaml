@@ -2,9 +2,10 @@ namespace:
   name: sandbox
  
 service:
-  port: 8111
+  port: 4111
   targetPort: 3111
   type: ClusterIP
+  protocol: TCP
 
 image:
   repository: nickwooduk/techtrends
