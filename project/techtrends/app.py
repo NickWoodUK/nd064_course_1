@@ -61,7 +61,7 @@ def post(post_id):
         app.logger.info('404 "' + str(post_id) + '" article not found!')
         return render_template('404.html'), 404
     else:
-        app.logger.info('Article "' + str(post['title'] + '" retrieved!'))
+        app.logger.exception('Article "' + str(post['title'] + '" retrieved!'))
         return render_template('post.html', post=post)
 
 
@@ -138,5 +138,10 @@ if __name__ == "__main__":
     format_output = '%(asctime)s %(message)s'
 
     logging.basicConfig(format=format_output, level=logging.DEBUG, handlers=[stdout_handler])
+
+    logger = logging.getLogger("name")
+    h2 = logging.StreamHandler(sys.stderr)
+    h2.setLevel(logging.ERROR)
+    logger.addHandler(h2)
 
     app.run(host='0.0.0.0', port='3111')
