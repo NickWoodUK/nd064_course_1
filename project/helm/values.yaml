@@ -6,6 +6,8 @@ service:
   targetPort: 3111
   type: ClusterIP
   protocol: TCP
+  livenessProbePath: /healthz
+  readinessProbePath: /healthz
 
 image:
   repository: nickwooduk/techtrends
