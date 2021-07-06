@@ -15,7 +15,7 @@ readinessProbe:
 livenessProbe:
  httpGet:
   path: /healthz
-   port: 3111
+  port: 3111
 
 image:
   repository: nickwooduk/techtrends
