@@ -52,7 +52,7 @@ spec:
         ## on application port 6112. If the application is not responsive, then the pod will be restarted automatically.
         livenessProbe:
            httpGet:
-            path: {{ .Values.livenessProbe.path }}
+            path: {{ .Values.livenessProbe.httpGet.path }}
             port: {{ .Values.livenessProbe.port }}
         ## Define the rules for the readiness probes.
         ## For example, verify the application on the main route `/`,
