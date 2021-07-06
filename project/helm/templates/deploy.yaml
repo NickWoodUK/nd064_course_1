@@ -53,14 +53,14 @@ spec:
         livenessProbe:
            httpGet:
             path: {{ .Values.livenessProbe.httpGet.path }}
-            port: {{ .Values.livenessProbe.port }}
+            port: {{ .Values.livenessProbe.httpGet.port }}
         ## Define the rules for the readiness probes.
         ## For example, verify the application on the main route `/`,
         ## on application port 6112. If the application is responsive, then traffic will be sent to this pod.
         readinessProbe:
            httpGet:
-             path: {{ .Values.readinessProbe.path }}
-             port: {{ .Values.readinessProbe.port }}
+             path: {{ .Values.readinessProbe.httpGet.path }}
+             port: {{ .Values.readinessProbe.httpGet.port }}
         ## Set the resource requests and limits for an application.
         resources:
         ## The resource requests guarantees that the desired amount
