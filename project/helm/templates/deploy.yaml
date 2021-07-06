@@ -52,15 +52,15 @@ spec:
         ## on application port 6112. If the application is not responsive, then the pod will be restarted automatically.
         livenessProbe:
            httpGet:
-             path: {{ .Values.service.livenessProbePath }}
-             port: {{ .Values.service.targetPort }}
+            path: { { .Values.livenessProbe.path } }
+            port: { { .Values.livenessProbe.port } }
         ## Define the rules for the readiness probes.
         ## For example, verify the application on the main route `/`,
         ## on application port 6112. If the application is responsive, then traffic will be sent to this pod.
         readinessProbe:
            httpGet:
-             path: {{ .Values.service.readinessProbePath }}
-             port: {{ .Values.service.targetPort }}
+             path: { { .Values.readinessProbe.path } }
+             port: { { .Values.readinessProbe.port } }
         ## Set the resource requests and limits for an application.
         resources:
         ## The resource requests guarantees that the desired amount
